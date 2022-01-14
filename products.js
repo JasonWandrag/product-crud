@@ -55,17 +55,28 @@ function readProducts(products) {
           <p class="card-text">R${product.price}</p>
           <div class="d-flex mb-3">
             <input type="number" class="form-control" value=1 min=1 id="addToCart${position}">
-            <button type="button" class="btn btn-secondary" onclick="addToCart(${position})">Add to cart</button>
+            <button type="button" class="btn btn-secondary ms-3" onclick="addToCart(${position})"><i class="fas fa-cart-plus"></i></button>
           </div>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProduct${position}" >
-            Edit
-          </button>
-          <button type="button" class="btn btn-danger" onclick="deleteProduct(${position})" >
-            Delete
-          </button>
+          
+          
+          
+          </div>
+          <div class="d-flex justify-content-end card-footer">
+            <button type="button" class="btn btn-primary w-50" data-bs-toggle="modal" data-bs-target="#editProduct${position}" >
+              Edit
+            </button>
+            <button type="button" class="btn btn-danger w-50 ms-3" onclick="deleteProduct(${position})" >
+              Delete
+            </button>
+          </div>
+      </div>
 
-           
-              <div
+
+
+
+
+
+      <div
                 class="modal fade"
                 id="editProduct${position}"
                 tabindex="-1"
@@ -149,13 +160,12 @@ function readProducts(products) {
                   </div>
                 </div>
               </div>
-        </div>
-      </div>
     `;
   });
 }
 
 readProducts(products);
+showCartBadge();
 
 // CREATE
 function createProduct() {
@@ -217,9 +227,31 @@ function deleteProduct(position) {
 // ADD TO CART
 function addToCart(position) {
   let qty = document.querySelector(`#addToCart${position}`).value;
-  cart.push({ ...products[position], qty });
-  // cart.push(products[position])
+  let added = false;
+  cart.forEach((product) => {
+    if (product.title == products[position].title) {
+      alert(
+        `You have successfully added ${qty} ${products[position].title} to the cart`
+      );
+      product.qty = parseInt(product.qty) + parseInt(qty);
+      added = true;
+    }
+  });
+  if (!added) {
+    cart.push({ ...products[position], qty });
+    alert(
+      `You have successfully added ${qty} ${products[position].title} to the cart`
+    );
+  }
+
+  showCartBadge();
+
   localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// Update Cart Badge
+function showCartBadge() {
+  document.querySelector("#badge").innerHTML = cart ? cart.length : "";
 }
 
 // SORT BY CATEGORY
