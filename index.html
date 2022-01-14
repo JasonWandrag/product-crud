@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="./main.css" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
       <div class="container">
         <a class="navbar-brand" href="#">Navbar</a>
         <button
@@ -139,6 +139,41 @@
         </div>
       </div>
     </nav>
+    <div class="container d-flex justify-content-end mb-3">
+      <div class="d-flex w-25 ms-3">
+        <label for="" class="form-label">Sort by category</label>
+        <select
+          class="form-select"
+          name=""
+          id="sortCategory"
+          onchange="sortCategory()"
+        >
+          <option value="All">All</option>
+          <option value="Fruit">Fruit</option>
+          <option value="Vegetables">Vegetables</option>
+          <option value="Meat">Meat</option>
+        </select>
+      </div>
+      <div class="d-flex w-25 ms-3">
+        <label for="" class="form-label">Sort name</label>
+        <select class="form-select" name="" id="sortName" onchange="sortName()">
+          <option value="ascending">Ascending</option>
+          <option value="descending">Descending</option>
+        </select>
+      </div>
+      <div class="d-flex w-25 ms-3">
+        <label for="" class="form-label">Sort price</label>
+        <select
+          class="form-select"
+          name=""
+          id="sortPrice"
+          onchange="sortPrice()"
+        >
+          <option value="ascending">Ascending</option>
+          <option value="descending">Descending</option>
+        </select>
+      </div>
+    </div>
     <div id="products" class="container d-flex"></div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
